@@ -31,8 +31,12 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/">
-          <a className="text-2xl font-bold font-display text-primary tracking-tight flex items-center gap-2">
-            <span className="bg-primary text-white w-10 h-10 flex items-center justify-center rounded-lg">DL</span>
+          <a className={`text-2xl font-bold font-display tracking-tight flex items-center gap-2 transition-colors ${
+            isScrolled ? "text-primary" : "text-white"
+          }`}>
+            <span className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
+              isScrolled ? "bg-primary text-white" : "bg-white text-primary"
+            }`}>DL</span>
             ĐĂNG LÂM
           </a>
         </Link>
@@ -43,19 +47,27 @@ export function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                isScrolled ? "text-slate-700" : "text-slate-800"
+              className={`text-sm font-medium transition-colors hover:opacity-80 ${
+                isScrolled ? "text-slate-700 hover:text-primary" : "text-white/90 hover:text-white"
               }`}
             >
               {link.name}
             </a>
           ))}
-          <Button className="font-semibold shadow-lg shadow-primary/20">Liên hệ ngay</Button>
+          <Button 
+            className={`font-semibold shadow-lg transition-all ${
+              isScrolled 
+                ? "bg-primary text-white shadow-primary/20 hover:bg-primary/90" 
+                : "bg-white text-primary hover:bg-blue-50 border-transparent shadow-black/5"
+            }`}
+          >
+            Liên hệ ngay
+          </Button>
         </nav>
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden p-2 text-slate-700"
+          className={`md:hidden p-2 transition-colors ${isScrolled ? "text-slate-700" : "text-white"}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X /> : <Menu />}
