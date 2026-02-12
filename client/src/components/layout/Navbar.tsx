@@ -20,7 +20,7 @@ export function Navbar() {
     { name: "Về chúng tôi", href: "#about" },
     { name: "Dịch vụ", href: "#services" },
     { name: "Bảng giá", href: "#pricing" },
-    { name: "Tin tức", href: "#news" },
+    { name: "Tin tức", href: "/news" },
   ];
 
   return (
