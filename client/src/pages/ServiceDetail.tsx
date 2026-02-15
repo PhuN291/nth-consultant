@@ -11,7 +11,8 @@ import {
   FileCheck,
   ChevronRight,
   Share2,
-  ThumbsUp
+  ThumbsUp,
+  Home
 } from "lucide-react";
 import { Link } from "wouter";
 import { useState } from "react";
@@ -49,13 +50,13 @@ export default function ServiceDetail() {
       </div>
 
       {/* Breadcrumbs - Add margin-top to separate from fixed header if needed, but Navbar inside the blue container is sticky already */}
-      <div className="bg-white border-b border-slate-100 pt-20">
+      <div className="bg-slate-50 border-b border-slate-200 pt-20">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap">
-            <Link href="/"><a className="hover:text-blue-600 transition-colors">Trang chủ</a></Link>
-            <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0" />
+            <Link href="/"><a className="hover:text-blue-600 transition-colors"><Home className="w-4 h-4" /></a></Link>
+            <span className="mx-2 text-slate-300">/</span>
             <Link href="/#services"><a className="hover:text-blue-600 transition-colors">Dịch vụ</a></Link>
-            <ChevronRight className="w-4 h-4 mx-2 flex-shrink-0" />
+            <span className="mx-2 text-slate-300">/</span>
             <span className="text-blue-600 font-medium truncate">Dịch vụ Kế toán Trọn gói</span>
           </div>
         </div>
