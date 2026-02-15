@@ -52,22 +52,22 @@ export default function ServiceDetail() {
       {/* Breadcrumbs - Add margin-top to separate from fixed header if needed, but Navbar inside the blue container is sticky already */}
       <div className="bg-slate-50 border-b border-slate-200 pt-20">
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap">
-            <Link href="/" className="hover:text-blue-600 transition-colors"><Home className="w-4 h-4" /></Link>
-            <span className="mx-2 text-slate-300">/</span>
-            <Link href="/#services" className="hover:text-blue-600 transition-colors">Dịch vụ</Link>
-            <span className="mx-2 text-slate-300">/</span>
+          <div className="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap scrollbar-hide">
+            <Link href="/" className="hover:text-blue-600 transition-colors flex-shrink-0"><Home className="w-4 h-4" /></Link>
+            <span className="mx-2 text-slate-300 flex-shrink-0">/</span>
+            <Link href="/#services" className="hover:text-blue-600 transition-colors flex-shrink-0">Dịch vụ</Link>
+            <span className="mx-2 text-slate-300 flex-shrink-0">/</span>
             <span className="text-blue-600 font-medium truncate">Dịch vụ Kế toán Trọn gói</span>
           </div>
         </div>
       </div>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-6 md:py-8">
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Main Content (Images + Info) */}
-          <div className="lg:col-span-9 space-y-8">
+          <div className="lg:col-span-9 space-y-6 md:space-y-8">
             {/* Product Overview Section */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 grid md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-slate-100 grid md:grid-cols-2 gap-6 md:gap-8">
               {/* Image Gallery */}
               <div className="space-y-4">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden border border-slate-100 bg-slate-50 relative group">
@@ -154,26 +154,26 @@ export default function ServiceDetail() {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
               <div className="flex border-b border-slate-100 overflow-x-auto scrollbar-hide">
                 <button 
-                  className={`px-6 py-4 font-semibold text-sm whitespace-nowrap transition-colors border-b-2 ${activeTab === 'description' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-blue-600'}`}
+                  className={`px-4 md:px-6 py-4 font-semibold text-sm whitespace-nowrap transition-colors border-b-2 flex-shrink-0 ${activeTab === 'description' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-blue-600'}`}
                   onClick={() => setActiveTab('description')}
                 >
                   Chi tiết dịch vụ
                 </button>
                 <button 
-                  className={`px-6 py-4 font-semibold text-sm whitespace-nowrap transition-colors border-b-2 ${activeTab === 'process' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-blue-600'}`}
+                  className={`px-4 md:px-6 py-4 font-semibold text-sm whitespace-nowrap transition-colors border-b-2 flex-shrink-0 ${activeTab === 'process' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-blue-600'}`}
                   onClick={() => setActiveTab('process')}
                 >
                   Quy trình làm việc
                 </button>
                 <button 
-                  className={`px-6 py-4 font-semibold text-sm whitespace-nowrap transition-colors border-b-2 ${activeTab === 'faq' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-blue-600'}`}
+                  className={`px-4 md:px-6 py-4 font-semibold text-sm whitespace-nowrap transition-colors border-b-2 flex-shrink-0 ${activeTab === 'faq' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-blue-600'}`}
                   onClick={() => setActiveTab('faq')}
                 >
                   Câu hỏi thường gặp
                 </button>
               </div>
 
-              <div className="p-6 md:p-8">
+              <div className="p-4 md:p-8">
                 {activeTab === 'description' && (
                   <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-slate-900 prose-p:text-slate-600 prose-li:text-slate-600">
                     <h3>Tại sao nên chọn dịch vụ kế toán trọn gói?</h3>
