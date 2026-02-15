@@ -7,11 +7,9 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
-            <Link href="/">
-              <a className="text-2xl font-bold font-display text-white mb-6 inline-block flex items-center gap-2">
+            <Link href="/" className="text-2xl font-bold font-display text-white mb-6 inline-block flex items-center gap-2">
                  <span className="bg-blue-600 text-white w-8 h-8 flex items-center justify-center rounded text-sm">DL</span>
                  ĐĂNG LÂM
-              </a>
             </Link>
             <p className="text-slate-400 leading-relaxed mb-6">
               Đối tác tin cậy của doanh nghiệp trong lĩnh vực kế toán, thuế và tư vấn tài chính. Chúng tôi cam kết mang lại giá trị bền vững.

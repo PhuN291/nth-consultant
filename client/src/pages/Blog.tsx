@@ -182,10 +182,8 @@ export default function Blog() {
               <span className="w-1 h-6 bg-blue-600 rounded-full block"></span>
               Mới Nhất
             </h2>
-            <Link href="#">
-              <a className="text-blue-600 font-semibold flex items-center hover:text-blue-800 transition-colors">
+            <Link href="#" className="text-blue-600 font-semibold flex items-center hover:text-blue-800 transition-colors">
                 Xem tất cả <ChevronRight className="w-4 h-4" />
-              </a>
             </Link>
           </div>
           

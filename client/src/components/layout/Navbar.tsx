@@ -35,28 +35,28 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between h-full">
         <Link href="/">
-          <a className={`text-2xl font-bold font-display tracking-tight flex items-center gap-2 transition-colors ${
+          <div className={`cursor-pointer text-2xl font-bold font-display tracking-tight flex items-center gap-2 transition-colors ${
             useDarkNav ? "text-primary" : "text-white"
           }`}>
             <span className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
               useDarkNav ? "bg-primary text-white" : "bg-white text-primary"
             }`}>DL</span>
             ĐĂNG LÂM
-          </a>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`text-sm font-medium transition-colors hover:opacity-80 ${
-                useDarkNav ? "text-slate-700 hover:text-primary" : "text-white/90 hover:text-white"
-              }`}
-            >
-              {link.name}
-            </a>
+            <Link key={link.name} href={link.href}>
+              <div
+                className={`cursor-pointer text-sm font-medium transition-colors hover:opacity-80 ${
+                  useDarkNav ? "text-slate-700 hover:text-primary" : "text-white/90 hover:text-white"
+                }`}
+              >
+                {link.name}
+              </div>
+            </Link>
           ))}
           <Button 
             className={`font-semibold shadow-lg transition-all ${
@@ -82,14 +82,14 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-xl p-4 flex flex-col gap-4 animate-in slide-in-from-top-5 max-h-[calc(100vh-80px)] overflow-y-auto">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-slate-700 font-medium py-2 px-4 hover:bg-slate-50 rounded-lg"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.name}
-            </a>
+            <Link key={link.name} href={link.href}>
+              <div
+                className="cursor-pointer text-slate-700 font-medium py-2 px-4 hover:bg-slate-50 rounded-lg"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.name}
+              </div>
+            </Link>
           ))}
           <Button className="w-full">Liên hệ ngay</Button>
         </div>

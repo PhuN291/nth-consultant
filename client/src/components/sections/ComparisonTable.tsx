@@ -91,6 +91,7 @@ export function ComparisonTable() {
           </div>
         </div>
       </div>
+    </div>
     </section>
   );
 }

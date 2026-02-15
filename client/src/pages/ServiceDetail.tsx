@@ -53,9 +53,9 @@ export default function ServiceDetail() {
       <div className="bg-slate-50 border-b border-slate-200 pt-20">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap">
-            <Link href="/"><a className="hover:text-blue-600 transition-colors"><Home className="w-4 h-4" /></a></Link>
+            <Link href="/" className="hover:text-blue-600 transition-colors"><Home className="w-4 h-4" /></Link>
             <span className="mx-2 text-slate-300">/</span>
-            <Link href="/#services"><a className="hover:text-blue-600 transition-colors">Dịch vụ</a></Link>
+            <Link href="/#services" className="hover:text-blue-600 transition-colors">Dịch vụ</Link>
             <span className="mx-2 text-slate-300">/</span>
             <span className="text-blue-600 font-medium truncate">Dịch vụ Kế toán Trọn gói</span>
           </div>
