@@ -4,10 +4,11 @@ import { Hero } from "@/components/sections/Hero";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { ComparisonTable } from "@/components/sections/ComparisonTable";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { PartnerLogos } from "@/components/sections/PartnerLogos";
 import { CheckCircle2 } from "lucide-react";
 
 import aboutTeam from "@/assets/images/about-team.jpg";
-import serviceAccounting from "@/assets/images/service-accounting.jpg";
 
 export default function Home() {
   return (
@@ -17,6 +18,8 @@ export default function Home() {
       <main>
         <Hero />
         
+        <PartnerLogos />
+
         <ServicesGrid />
         
         {/* Why Choose Us Section - Added manually here as it's simple enough */}
@@ -66,6 +69,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <Testimonials />
 
         <ComparisonTable />
         
