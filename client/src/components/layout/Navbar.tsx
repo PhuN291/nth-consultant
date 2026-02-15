@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
@@ -6,6 +6,10 @@ import { Menu, X } from "lucide-react";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
+
+  const isHome = location === "/";
+  const useDarkNav = !isHome || isScrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,16 +30,16 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-4 h-[72px]" : "bg-transparent py-6 h-[88px]"
+        useDarkNav ? "bg-white/90 backdrop-blur-md shadow-sm py-4 h-[72px]" : "bg-transparent py-6 h-[88px]"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between h-full">
         <Link href="/">
           <a className={`text-2xl font-bold font-display tracking-tight flex items-center gap-2 transition-colors ${
-            isScrolled ? "text-primary" : "text-white"
+            useDarkNav ? "text-primary" : "text-white"
           }`}>
             <span className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
-              isScrolled ? "bg-primary text-white" : "bg-white text-primary"
+              useDarkNav ? "bg-primary text-white" : "bg-white text-primary"
             }`}>DL</span>
             ĐĂNG LÂM
           </a>
@@ -48,7 +52,7 @@ export function Navbar() {
               key={link.name}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:opacity-80 ${
-                isScrolled ? "text-slate-700 hover:text-primary" : "text-white/90 hover:text-white"
+                useDarkNav ? "text-slate-700 hover:text-primary" : "text-white/90 hover:text-white"
               }`}
             >
               {link.name}
@@ -56,7 +60,7 @@ export function Navbar() {
           ))}
           <Button 
             className={`font-semibold shadow-lg transition-all ${
-              isScrolled 
+              useDarkNav 
                 ? "bg-primary text-white shadow-primary/20 hover:bg-primary/90" 
                 : "bg-white text-primary hover:bg-blue-50 border-transparent shadow-black/5"
             }`}
@@ -67,7 +71,7 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className={`md:hidden p-2 transition-colors ${isScrolled ? "text-slate-700" : "text-white"}`}
+          className={`md:hidden p-2 transition-colors ${useDarkNav ? "text-slate-700" : "text-white"}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X /> : <Menu />}
