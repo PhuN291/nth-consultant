@@ -26,10 +26,10 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-4" : "bg-transparent py-6"
+        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-4 h-[72px]" : "bg-transparent py-6 h-[88px]"
       }`}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 flex items-center justify-between h-full">
         <Link href="/">
           <a className={`text-2xl font-bold font-display tracking-tight flex items-center gap-2 transition-colors ${
             isScrolled ? "text-primary" : "text-white"

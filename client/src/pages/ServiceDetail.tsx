@@ -23,6 +23,7 @@ import img3 from "@/assets/images/service-detail-3.jpg";
 
 export default function ServiceDetail() {
   const [activeTab, setActiveTab] = useState("description");
+  const [selectedImage, setSelectedImage] = useState(0);
 
   const service = {
     title: "Dịch vụ Kế toán Trọn gói cho Doanh nghiệp SME",
@@ -47,8 +48,8 @@ export default function ServiceDetail() {
         <Navbar />
       </div>
 
-      {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-100">
+      {/* Breadcrumbs - Add margin-top to separate from fixed header if needed, but Navbar inside the blue container is sticky already */}
+      <div className="bg-white border-b border-slate-100 pt-20">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap">
             <Link href="/"><a className="hover:text-blue-600 transition-colors">Trang chủ</a></Link>
@@ -70,7 +71,7 @@ export default function ServiceDetail() {
               <div className="space-y-4">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden border border-slate-100 bg-slate-50 relative group">
                   <img 
-                    src={service.images[0]} 
+                    src={service.images[selectedImage]} 
                     alt={service.title} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
@@ -80,7 +81,15 @@ export default function ServiceDetail() {
                 </div>
                 <div className="grid grid-cols-3 gap-3">
                   {service.images.map((img, idx) => (
-                    <button key={idx} className="aspect-square rounded-lg overflow-hidden border border-slate-100 hover:border-blue-500 hover:ring-2 hover:ring-blue-200 transition-all">
+                    <button 
+                      key={idx} 
+                      className={`aspect-square rounded-lg overflow-hidden border transition-all ${
+                        selectedImage === idx 
+                          ? "border-blue-600 ring-2 ring-blue-200" 
+                          : "border-slate-100 hover:border-blue-400"
+                      }`}
+                      onClick={() => setSelectedImage(idx)}
+                    >
                       <img src={img} alt="" className="w-full h-full object-cover" />
                     </button>
                   ))}
