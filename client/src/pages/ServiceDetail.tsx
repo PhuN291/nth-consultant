@@ -44,7 +44,7 @@ export default function ServiceDetail() {
   };
 
   return (
-    <div className="min-h-screen font-sans bg-slate-50 selection:bg-blue-100 selection:text-blue-900">
+    <div className="min-h-screen font-sans bg-slate-50 selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
       <div className="bg-blue-900 sticky top-0 z-50">
         <Navbar />
       </div>
@@ -52,7 +52,7 @@ export default function ServiceDetail() {
       {/* Breadcrumbs - Add margin-top to separate from fixed header if needed, but Navbar inside the blue container is sticky already */}
       <div className="bg-slate-50 border-b border-slate-200 pt-20">
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap scrollbar-hide">
+          <div className="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
             <Link href="/" className="hover:text-blue-600 transition-colors flex-shrink-0"><Home className="w-4 h-4" /></Link>
             <span className="mx-2 text-slate-300 flex-shrink-0">/</span>
             <Link href="/#services" className="hover:text-blue-600 transition-colors flex-shrink-0">Dịch vụ</Link>
