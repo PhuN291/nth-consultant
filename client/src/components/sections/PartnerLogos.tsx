@@ -32,11 +32,11 @@ export function PartnerLogos() {
 
         {/* Row 1: Left to Right (Normal scroll) */}
         <div className="flex mb-8 overflow-hidden group">
-          <div className="flex gap-12 md:gap-24 animate-marquee whitespace-nowrap group-hover:[animation-play-state:paused]">
+          <div className="flex gap-8 md:gap-24 animate-marquee whitespace-nowrap group-hover:[animation-play-state:paused]">
             {[...row1, ...row1, ...row1, ...row1].map((logo, idx) => (
               <div key={idx} className="flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 cursor-pointer">
-                <logo.icon className="w-8 h-8 md:w-10 md:h-10 text-blue-600" />
-                <span className="text-xl md:text-2xl font-bold font-display text-slate-800">{logo.name}</span>
+                <logo.icon className="w-6 h-6 md:w-10 md:h-10 text-blue-600" />
+                <span className="text-lg md:text-2xl font-bold font-display text-slate-800">{logo.name}</span>
               </div>
             ))}
           </div>
@@ -44,11 +44,11 @@ export function PartnerLogos() {
 
         {/* Row 2: Right to Left (Reverse scroll) */}
         <div className="flex overflow-hidden group">
-          <div className="flex gap-12 md:gap-24 animate-marquee-reverse whitespace-nowrap group-hover:[animation-play-state:paused]">
+          <div className="flex gap-8 md:gap-24 animate-marquee-reverse whitespace-nowrap group-hover:[animation-play-state:paused]">
             {[...row2, ...row2, ...row2, ...row2].map((logo, idx) => (
               <div key={idx} className="flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 cursor-pointer">
-                <logo.icon className="w-8 h-8 md:w-10 md:h-10 text-blue-600" />
-                <span className="text-xl md:text-2xl font-bold font-display text-slate-800">{logo.name}</span>
+                <logo.icon className="w-6 h-6 md:w-10 md:h-10 text-blue-600" />
+                <span className="text-lg md:text-2xl font-bold font-display text-slate-800">{logo.name}</span>
               </div>
             ))}
           </div>

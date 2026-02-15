@@ -14,8 +14,12 @@ export function ComparisonTable() {
           </p>
         </div>
 
-        <div className="overflow-x-auto">
-          <div className="min-w-[800px] bg-white rounded-2xl border border-slate-100 shadow-xl shadow-slate-100/50">
+        <div className="relative">
+          {/* Scroll hint for mobile */}
+          <div className="md:hidden absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
+          
+          <div className="overflow-x-auto pb-4">
+            <div className="min-w-[800px] bg-white rounded-2xl border border-slate-100 shadow-xl shadow-slate-100/50">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-slate-100">

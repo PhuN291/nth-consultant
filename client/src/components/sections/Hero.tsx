@@ -4,7 +4,7 @@ import heroBg from "@/assets/images/hero-bg.jpg";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center pt-28 pb-16 md:pt-20 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
