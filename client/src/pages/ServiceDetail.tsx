@@ -65,7 +65,7 @@ export default function ServiceDetail() {
       <main className="container mx-auto px-4 py-6 md:py-8">
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Main Content (Images + Info) */}
-          <div className="lg:col-span-9 space-y-6 md:space-y-8">
+          <div className="lg:col-span-9 space-y-6 md:space-y-8 min-w-0">
             {/* Product Overview Section */}
             <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-slate-100 grid md:grid-cols-2 gap-6 md:gap-8">
               {/* Image Gallery */}
@@ -252,7 +252,7 @@ export default function ServiceDetail() {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3 space-y-6 min-w-0">
             {/* Trusted By Box */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
               <h4 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
