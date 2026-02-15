@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calculator, FileText, PieChart, ShieldCheck, Scale, FileSearch, ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 
 const services = [
   {
@@ -79,9 +80,11 @@ export function ServicesGrid() {
                 </ul>
               </CardContent>
               <CardFooter className="pt-0">
-                <Button variant="ghost" className="p-0 text-blue-600 hover:text-blue-800 hover:bg-transparent font-medium group/btn">
-                  Xem chi tiết <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                </Button>
+                <Link href="/services/detail">
+                  <Button variant="ghost" className="p-0 text-blue-600 hover:text-blue-800 hover:bg-transparent font-medium group/btn">
+                    Xem chi tiết <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                  </Button>
+                </Link>
               </CardFooter>
             </Card>
           ))}
