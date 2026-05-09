@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import heroBg from "@/assets/images/hero-bg.jpg";
-import { Link } from "wouter";
+import { ContactDialog } from "@/components/ContactDialog";
+import { AnchorLink } from "@/components/AnchorLink";
 
 export function Hero() {
   return (
@@ -36,16 +37,19 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="#contact">
-              <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold h-12 px-8 w-full sm:w-auto">
-                Nhận tư vấn miễn phí
-              </Button>
-            </Link>
-            <Link href="#services">
+            <ContactDialog
+              source="hero-cta"
+              trigger={
+                <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold h-12 px-8 w-full sm:w-auto">
+                  Nhận tư vấn miễn phí
+                </Button>
+              }
+            />
+            <AnchorLink href="#dich-vu" className="w-full sm:w-auto">
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:border-white h-12 px-8 w-full sm:w-auto">
                 Xem dịch vụ <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </Link>
+            </AnchorLink>
           </div>
 
           <div className="mt-12 flex flex-col sm:flex-row gap-8 text-sm font-medium text-blue-200">

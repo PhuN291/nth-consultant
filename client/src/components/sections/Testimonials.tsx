@@ -8,7 +8,7 @@ const testimonials = [
     id: 1,
     name: "Trần Văn Hùng",
     role: "CEO, Công ty TechSolutions",
-    content: "Dịch vụ của Đăng Lâm giúp chúng tôi tiết kiệm được 40% chi phí vận hành bộ phận kế toán. Đội ngũ hỗ trợ cực kỳ nhiệt tình và chuyên nghiệp, luôn giải đáp thắc mắc ngay lập tức.",
+    content: "Dịch vụ của NTH Consulting giúp chúng tôi tiết kiệm được 40% chi phí vận hành bộ phận kế toán. Đội ngũ hỗ trợ cực kỳ nhiệt tình và chuyên nghiệp, luôn giải đáp thắc mắc ngay lập tức.",
     image: img1,
     rating: 5
   },
@@ -16,7 +16,7 @@ const testimonials = [
     id: 2,
     name: "Nguyễn Thị Mai",
     role: "Founder, Chuỗi Café Mai",
-    content: "Tôi rất yên tâm khi giao phó sổ sách thuế cho Đăng Lâm. Từ ngày hợp tác, tôi không còn lo lắng về các kỳ quyết toán thuế nữa, mọi thứ đều minh bạch và rõ ràng.",
+    content: "Tôi rất yên tâm khi giao phó sổ sách thuế cho NTH Consulting. Từ ngày hợp tác, tôi không còn lo lắng về các kỳ quyết toán thuế nữa, mọi thứ đều minh bạch và rõ ràng.",
     image: img2,
     rating: 5
   },
@@ -44,7 +44,7 @@ export function Testimonials() {
             Sự Hài Lòng Của Khách Hàng Là Niềm Tự Hào
           </h2>
           <p className="text-slate-600 text-lg">
-            Hơn 500+ doanh nghiệp đã tin tưởng lựa chọn Đăng Lâm làm đối tác kế toán chiến lược.
+            Hơn 500+ doanh nghiệp đã tin tưởng lựa chọn NTH Consulting làm đối tác kế toán chiến lược.
           </p>
         </div>
 

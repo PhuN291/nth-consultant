@@ -1,16 +1,23 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { type Server } from "http";
+import authRouter from "./routes/auth";
+import blogRouter, { adminBlogRouter } from "./routes/blog";
+import uploadRouter from "./routes/upload";
+import contactRouter, { adminContactRouter } from "./routes/contact";
 
 export async function registerRoutes(
-  httpServer: Server,
+  _httpServer: Server,
   app: Express
 ): Promise<Server> {
-  // put application routes here
-  // prefix all routes with /api
+  // Public APIs
+  app.use("/api/auth", authRouter);
+  app.use("/api/blog", blogRouter);
+  app.use("/api/contact", contactRouter);
 
-  // use storage to perform CRUD operations on the storage interface
-  // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
+  // Admin APIs (auth + blog admin CRUD + upload + contact)
+  app.use("/api/admin/blog", adminBlogRouter);
+  app.use("/api/admin/upload", uploadRouter);
+  app.use("/api/admin/contact", adminContactRouter);
 
-  return httpServer;
+  return _httpServer;
 }
