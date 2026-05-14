@@ -11,15 +11,20 @@ import {
   Briefcase,
   Building2,
   IdCard,
+  Wallet,
+  FileEdit,
+  PauseCircle,
+  Network,
 } from "lucide-react";
 import { Link } from "wouter";
 
 interface ServiceCard {
   title: string;
-  slug: string;
+  slug?: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
   features: string[];
+  comingSoon?: boolean;
 }
 
 interface ServiceCategory {
@@ -68,6 +73,13 @@ const categories: ServiceCategory[] = [
         icon: ShieldCheck,
         features: ["Chuẩn bị hồ sơ", "Giải trình số liệu", "Đại diện làm việc với cơ quan thuế", "Tư vấn xử lý rủi ro"],
       },
+      {
+        title: "Dịch vụ hoàn thuế (TNCN/GTGT)",
+        description: "Hỗ trợ doanh nghiệp và cá nhân hoàn thuế nhanh chóng, đúng quy định, tối ưu số thuế được hoàn.",
+        icon: Wallet,
+        features: ["Rà soát hồ sơ hoàn thuế", "Lập tờ khai và đề nghị hoàn", "Làm việc với cơ quan thuế", "Theo dõi đến khi nhận tiền"],
+        comingSoon: true,
+      },
     ],
   },
   {
@@ -80,6 +92,27 @@ const categories: ServiceCategory[] = [
         description: "Thành lập công ty trọn gói từ A–Z, sẵn sàng vận hành ngay sau khi nhận giấy phép.",
         icon: Building2,
         features: ["Tư vấn loại hình DN", "Soạn hồ sơ đăng ký", "Thủ tục thuế ban đầu", "Hỗ trợ sau thành lập"],
+      },
+      {
+        title: "Dịch vụ thay đổi thông tin đăng ký doanh nghiệp",
+        description: "Cập nhật thông tin đăng ký kinh doanh nhanh chóng, đúng quy định pháp luật.",
+        icon: FileEdit,
+        features: ["Đổi tên, địa chỉ, ngành nghề", "Thay đổi vốn điều lệ", "Thay đổi người đại diện", "Cập nhật thông tin thuế"],
+        comingSoon: true,
+      },
+      {
+        title: "Dịch vụ tạm ngừng kinh doanh",
+        description: "Hỗ trợ thủ tục tạm ngừng hoạt động đúng quy định, tránh phát sinh nghĩa vụ thuế không cần thiết.",
+        icon: PauseCircle,
+        features: ["Tư vấn điều kiện tạm ngừng", "Soạn và nộp hồ sơ", "Thông báo cơ quan thuế", "Hỗ trợ khôi phục hoạt động"],
+        comingSoon: true,
+      },
+      {
+        title: "Dịch vụ thành lập chi nhánh/Văn phòng đại diện",
+        description: "Mở rộng quy mô doanh nghiệp với chi nhánh, văn phòng đại diện được đăng ký đúng quy định.",
+        icon: Network,
+        features: ["Tư vấn lựa chọn mô hình", "Chuẩn bị hồ sơ đăng ký", "Đăng ký mã số thuế", "Hỗ trợ vận hành ban đầu"],
+        comingSoon: true,
       },
       {
         title: "Dịch vụ giải thể doanh nghiệp",
@@ -165,17 +198,23 @@ export function ServicesGrid() {
                       </ul>
                     </CardContent>
                     <CardFooter className="pt-0">
-                      <Link
-                        href={`/dich-vu/${service.slug}`}
-                        className={buttonVariants({
-                          variant: "ghost",
-                          className:
-                            "p-0 text-blue-600 hover:text-blue-800 hover:bg-transparent font-medium group/btn",
-                        })}
-                      >
-                        Xem chi tiết
-                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                      </Link>
+                      {service.slug ? (
+                        <Link
+                          href={`/dich-vu/${service.slug}`}
+                          className={buttonVariants({
+                            variant: "ghost",
+                            className:
+                              "p-0 text-blue-600 hover:text-blue-800 hover:bg-transparent font-medium group/btn",
+                          })}
+                        >
+                          Xem chi tiết
+                          <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                        </Link>
+                      ) : (
+                        <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
+                          Tư vấn liên hệ
+                        </span>
+                      )}
                     </CardFooter>
                   </Card>
                 ))}

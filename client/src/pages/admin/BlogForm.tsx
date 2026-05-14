@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { TiptapEditor } from "@/components/admin/TiptapEditor";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { handleAdminMutationError } from "@/lib/admin-error";
+import { useToast } from "@/hooks/use-toast";
 import type { BlogPost } from "@shared/schema";
 import { ArrowLeft, Upload } from "lucide-react";
 
@@ -19,11 +21,13 @@ const CATEGORIES = [
   "Tin tức nội bộ",
 ];
 
+const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
+
 function slugify(s: string): string {
   return s
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .replace(/đ/g, "d")
     .replace(/[^a-z0-9\s-]/g, "")
     .trim()
@@ -58,6 +62,7 @@ export default function BlogForm() {
   const [, params] = useRoute<{ id: string }>("/admin/blog/:id/edit");
   const isEdit = Boolean(params?.id);
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
   const [form, setForm] = useState<FormState>(EMPTY);
   const [error, setError] = useState<string | null>(null);
   const [slugTouched, setSlugTouched] = useState(false);
@@ -84,9 +89,20 @@ export default function BlogForm() {
     }
   }, [existingPost]);
 
-  // Auto-slug khi gõ title (chỉ khi chưa edit slug thủ công)
+  const updateForm = (patch: Partial<FormState>) => {
+    setForm((f) => ({ ...f, ...patch }));
+    if (error) setError(null);
+  };
+
   const onTitleChange = (title: string) => {
     setForm((f) => ({ ...f, title, slug: slugTouched ? f.slug : slugify(title) }));
+    if (error) setError(null);
+  };
+
+  const onSlugChange = (raw: string) => {
+    setForm((f) => ({ ...f, slug: slugify(raw) }));
+    setSlugTouched(true);
+    if (error) setError(null);
   };
 
   const save = useMutation({
@@ -102,10 +118,17 @@ export default function BlogForm() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/blog"] });
       queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
+      toast({
+        title: isEdit ? "Đã cập nhật bài viết" : "Đã tạo bài viết mới",
+      });
       setLocation("/admin/blog");
     },
     onError: (err: any) => {
-      setError(err?.message?.replace(/^\d+:\s*/, "") || "Lưu thất bại");
+      const msg = err?.message?.replace(/^\d+:\s*/, "") || "Lưu thất bại";
+      setError(msg);
+      if (err?.message?.startsWith("401:")) {
+        handleAdminMutationError(err);
+      }
     },
   });
 
@@ -120,6 +143,15 @@ export default function BlogForm() {
     if (!file) return;
     e.target.value = "";
 
+    if (file.size > MAX_UPLOAD_BYTES) {
+      toast({
+        title: "Ảnh bìa quá lớn",
+        description: `Tối đa 5MB. File này: ${(file.size / 1024 / 1024).toFixed(1)}MB`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       const fd = new FormData();
       fd.append("file", file);
@@ -130,9 +162,17 @@ export default function BlogForm() {
       });
       if (!res.ok) throw new Error(await res.text());
       const data = await res.json();
+      if (typeof data?.url !== "string") {
+        throw new Error("Server không trả về URL ảnh hợp lệ");
+      }
       setForm((f) => ({ ...f, coverImageUrl: data.url }));
+      toast({ title: "Tải ảnh bìa thành công" });
     } catch (err: any) {
-      alert(`Upload ảnh bìa thất bại: ${err?.message ?? err}`);
+      toast({
+        title: "Tải ảnh bìa thất bại",
+        description: err?.message ?? String(err),
+        variant: "destructive",
+      });
     }
   };
 
@@ -149,10 +189,11 @@ export default function BlogForm() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <button
+            type="button"
             onClick={() => setLocation("/admin/blog")}
-            className="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-1 mb-2"
+            className="text-sm text-slate-600 hover:text-slate-900 flex items-center gap-1 mb-2"
           >
-            <ArrowLeft className="w-4 h-4" /> Quay lại danh sách
+            <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Quay lại danh sách
           </button>
           <h1 className="text-2xl font-bold font-display text-slate-900">
             {isEdit ? "Sửa bài viết" : "Bài viết mới"}
@@ -160,7 +201,7 @@ export default function BlogForm() {
         </div>
       </div>
 
-      <form onSubmit={onSubmit} className="grid lg:grid-cols-3 gap-6">
+      <form onSubmit={onSubmit} className="grid lg:grid-cols-3 gap-6 pb-20 lg:pb-0">
         <div className="lg:col-span-2 space-y-4">
           <div className="space-y-2">
             <Label htmlFor="title">Tiêu đề *</Label>
@@ -178,16 +219,12 @@ export default function BlogForm() {
             <Input
               id="slug"
               value={form.slug}
-              onChange={(e) => {
-                setForm((f) => ({ ...f, slug: e.target.value }));
-                setSlugTouched(true);
-              }}
+              onChange={(e) => onSlugChange(e.target.value)}
               required
               placeholder="vi-du-slug-bai-viet"
-              pattern="[a-z0-9\-]+"
               maxLength={200}
             />
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-600">
               URL: /tin-tuc/<span className="font-mono">{form.slug || "(chưa có)"}</span>
             </p>
           </div>
@@ -197,17 +234,23 @@ export default function BlogForm() {
             <Textarea
               id="excerpt"
               value={form.excerpt}
-              onChange={(e) => setForm((f) => ({ ...f, excerpt: e.target.value }))}
+              onChange={(e) => updateForm({ excerpt: e.target.value })}
               rows={2}
               maxLength={500}
               placeholder="Mô tả ngắn 1-2 câu hiển thị ở danh sách bài viết..."
             />
-            <p className="text-xs text-slate-500">{form.excerpt.length}/500 ký tự</p>
+            <p className="text-xs text-slate-600">{form.excerpt.length}/500 ký tự</p>
           </div>
 
           <div className="space-y-2">
             <Label>Nội dung *</Label>
-            <TiptapEditor value={form.contentHtml} onChange={(html) => setForm((f) => ({ ...f, contentHtml: html }))} />
+            <TiptapEditor
+              value={form.contentHtml}
+              onChange={(html) => {
+                setForm((f) => ({ ...f, contentHtml: html }));
+                if (error) setError(null);
+              }}
+            />
           </div>
         </div>
 
@@ -220,7 +263,7 @@ export default function BlogForm() {
               <select
                 id="category"
                 value={form.category}
-                onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
+                onChange={(e) => updateForm({ category: e.target.value })}
                 className="w-full h-9 px-3 rounded-md border border-slate-200 text-sm bg-white"
               >
                 {CATEGORIES.map((c) => (
@@ -236,7 +279,7 @@ export default function BlogForm() {
               <Input
                 id="author"
                 value={form.author}
-                onChange={(e) => setForm((f) => ({ ...f, author: e.target.value }))}
+                onChange={(e) => updateForm({ author: e.target.value })}
                 maxLength={100}
               />
             </div>
@@ -246,7 +289,7 @@ export default function BlogForm() {
                 id="published"
                 type="checkbox"
                 checked={form.published}
-                onChange={(e) => setForm((f) => ({ ...f, published: e.target.checked }))}
+                onChange={(e) => updateForm({ published: e.target.checked })}
                 className="w-4 h-4"
               />
               <Label htmlFor="published" className="!mt-0">Đăng công khai</Label>
@@ -254,37 +297,62 @@ export default function BlogForm() {
           </div>
 
           <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
-            <h2 className="font-bold text-slate-900">Ảnh bìa</h2>
+            <div>
+              <h2 className="font-bold text-slate-900">Ảnh bìa</h2>
+              <p className="text-xs text-slate-600 mt-1">Khuyến nghị 1200×675px (16:9), tối đa 5MB.</p>
+            </div>
             {form.coverImageUrl ? (
               <div className="space-y-2">
-                <img src={form.coverImageUrl} alt="Cover" className="w-full rounded-lg aspect-video object-cover" />
+                <img
+                  src={form.coverImageUrl}
+                  alt="Ảnh bìa"
+                  className="w-full rounded-lg aspect-video object-cover bg-slate-100"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display = "none";
+                  }}
+                />
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   className="w-full"
-                  onClick={() => setForm((f) => ({ ...f, coverImageUrl: null }))}
+                  onClick={() => updateForm({ coverImageUrl: null })}
                 >
                   Xoá ảnh bìa
                 </Button>
               </div>
             ) : (
               <Button type="button" variant="outline" className="w-full" onClick={() => coverInputRef.current?.click()}>
-                <Upload className="w-4 h-4 mr-2" />
+                <Upload className="w-4 h-4 mr-2" aria-hidden="true" />
                 Tải ảnh bìa
               </Button>
             )}
-            <input ref={coverInputRef} type="file" accept="image/*" onChange={onCoverUpload} className="hidden" />
+            <input ref={coverInputRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={onCoverUpload} className="hidden" />
           </div>
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-3 py-2">{error}</div>
           )}
 
-          <Button type="submit" className="w-full" disabled={save.isPending}>
+          <Button type="submit" className="w-full hidden lg:flex" disabled={save.isPending}>
             {save.isPending ? "Đang lưu..." : isEdit ? "Cập nhật" : "Tạo bài viết"}
           </Button>
         </aside>
+
+        <div className="lg:hidden fixed bottom-0 inset-x-0 z-30 bg-white border-t border-slate-200 px-4 py-3 shadow-[0_-4px_12px_rgba(0,0,0,0.04)]">
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 text-xs rounded-md px-2 py-1.5 mb-2">
+              {error}
+            </div>
+          )}
+          <Button
+            type="submit"
+            className="w-full min-h-[44px]"
+            disabled={save.isPending}
+          >
+            {save.isPending ? "Đang lưu..." : isEdit ? "Cập nhật" : "Tạo bài viết"}
+          </Button>
+        </div>
       </form>
     </AdminLayout>
   );

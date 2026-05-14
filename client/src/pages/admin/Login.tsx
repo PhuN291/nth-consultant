@@ -52,7 +52,10 @@ export default function AdminLogin() {
               type="text"
               autoComplete="username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                if (error) setError(null);
+              }}
               required
               disabled={login.isPending}
             />
@@ -64,7 +67,10 @@ export default function AdminLogin() {
               type="password"
               autoComplete="current-password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (error) setError(null);
+              }}
               required
               disabled={login.isPending}
             />

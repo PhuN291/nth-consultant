@@ -19,7 +19,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/tin-tuc" component={Blog} />
-      <Route path="/news/:slug" component={BlogPost} />
+      <Route path="/tin-tuc/:slug" component={BlogPost} />
       <Route path="/dich-vu/:slug" component={ServiceDetail} />
       <Route path="/chinh-sach-bao-mat" component={PrivacyPolicy} />
       <Route path="/dieu-khoan-su-dung" component={TermsOfService} />

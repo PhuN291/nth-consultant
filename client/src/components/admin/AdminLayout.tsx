@@ -1,11 +1,12 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation, useRoute } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { LogOut, FileText, Inbox, Menu } from "lucide-react";
+import { LogOut, FileText, Inbox, Menu, AlertTriangle } from "lucide-react";
 import { useCurrentAdmin, useLogout } from "@/lib/auth";
 import type { ContactSubmission } from "@shared/schema";
+import logoMark from "@/assets/images/logo-mark.png";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -39,9 +40,10 @@ function SidebarContent({
         <Link href="/admin/blog">
           <span
             onClick={onNavigate}
-            className="font-display font-bold text-slate-900 cursor-pointer text-base"
+            className="flex items-center gap-2 cursor-pointer"
           >
-            NTH Admin
+            <img src={logoMark} alt="" className="w-7 h-7 rounded-md object-cover" />
+            <span className="font-display font-bold text-slate-900 text-base">NTH Admin</span>
           </span>
         </Link>
       </div>
@@ -112,17 +114,25 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   });
   const pendingContacts = contactData?.items.filter((x) => !x.handled).length ?? 0;
 
-  if (isLoading) {
+  // Cảnh báo thiếu cấu hình (Cloudinary)
+  const { data: configStatus } = useQuery<{ cloudinary: boolean }>({
+    queryKey: ["/api/admin/config-status"],
+    enabled: !!admin,
+    staleTime: 5 * 60_000,
+  });
+
+  useEffect(() => {
+    if (!isLoading && !admin) {
+      setLocation("/admin/login");
+    }
+  }, [admin, isLoading, setLocation]);
+
+  if (isLoading || !admin) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <p className="text-slate-500">Đang tải...</p>
       </div>
     );
-  }
-
-  if (!admin) {
-    setLocation("/admin/login");
-    return null;
   }
 
   const navItems: NavItem[] = [
@@ -165,20 +175,37 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           </SheetContent>
         </Sheet>
         <Link href="/admin/blog">
-          <span className="font-display font-bold text-slate-900 cursor-pointer">NTH Admin</span>
+          <span className="flex items-center gap-2 cursor-pointer">
+            <img src={logoMark} alt="" className="w-7 h-7 rounded-md object-cover" />
+            <span className="font-display font-bold text-slate-900">NTH Admin</span>
+          </span>
         </Link>
         {pendingContacts > 0 && (
-          <span className="ml-auto inline-flex items-center gap-1 text-xs text-slate-600">
-            <Inbox className="w-3.5 h-3.5" />
-            <span className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold rounded-full bg-red-500 text-white">
-              {pendingContacts > 99 ? "99+" : pendingContacts}
-            </span>
-          </span>
+          <Link href="/admin/lien-he">
+            <button
+              aria-label={`${pendingContacts} yêu cầu liên hệ chưa xử lý`}
+              className="ml-auto inline-flex items-center gap-1.5 text-xs text-slate-700 hover:text-blue-600 px-2 py-2 rounded-md hover:bg-slate-50 transition-colors min-h-[40px]"
+            >
+              <Inbox className="w-4 h-4" aria-hidden="true" />
+              <span className="inline-flex items-center justify-center min-w-[20px] h-[20px] px-1.5 text-[10px] font-bold rounded-full bg-red-500 text-white">
+                {pendingContacts > 99 ? "99+" : pendingContacts}
+              </span>
+            </button>
+          </Link>
         )}
       </header>
 
       {/* Main content */}
       <main className="md:pl-60">
+        {configStatus && configStatus.cloudinary === false && (
+          <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5 md:px-8 flex items-start gap-2.5">
+            <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <p className="text-sm text-amber-900">
+              <span className="font-semibold">Cloudinary chưa cấu hình.</span>{" "}
+              Tính năng upload ảnh sẽ không hoạt động. Đặt biến môi trường <code className="font-mono text-xs bg-amber-100 px-1.5 py-0.5 rounded">CLOUDINARY_URL</code> trong file <code className="font-mono text-xs bg-amber-100 px-1.5 py-0.5 rounded">.env</code> rồi khởi động lại server.
+            </p>
+          </div>
+        )}
         <div className="px-4 py-6 md:px-8 md:py-8">{children}</div>
       </main>
     </div>

@@ -4,6 +4,7 @@ import { useState, useEffect, ReactNode } from "react";
 import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { ContactDialog } from "@/components/ContactDialog";
 import { AnchorLink } from "@/components/AnchorLink";
+import logoHorizontal from "@/assets/images/logo-horizontal.png";
 
 // Wrapper: dùng AnchorLink cho hash, Link cho path
 function NavItem({ href, children, onClick }: { href: string; children: ReactNode; onClick?: () => void }) {
@@ -39,15 +40,35 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const serviceSubLinks = [
-    { name: "Kế toán trọn gói", href: "/dich-vu/ke-toan-tron-goi" },
-    { name: "Lập BCTC cuối năm", href: "/dich-vu/lap-bctc-cuoi-nam" },
-    { name: "Báo cáo thuế", href: "/dich-vu/ke-khai-thue" },
-    { name: "Quyết toán thuế", href: "/dich-vu/quyet-toan-thue" },
-    { name: "Rà soát sổ sách", href: "/dich-vu/ra-soat-so-sach" },
-    { name: "Giải thể doanh nghiệp", href: "/dich-vu/giai-the-doanh-nghiep" },
-    { name: "Giấy phép lao động & Thẻ tạm trú", href: "/dich-vu/giay-phep-lao-dong" },
-    { name: "Thành lập doanh nghiệp", href: "/dich-vu/thanh-lap-doanh-nghiep" },
+  const serviceGroups: { label: string; items: { name: string; href?: string }[] }[] = [
+    {
+      label: "Dịch vụ kế toán và thuế",
+      items: [
+        { name: "Kế toán trọn gói", href: "/dich-vu/ke-toan-tron-goi" },
+        { name: "Rà soát sổ sách kế toán", href: "/dich-vu/ra-soat-so-sach" },
+        { name: "Lập BCTC cuối năm", href: "/dich-vu/lap-bctc-cuoi-nam" },
+        { name: "Báo cáo thuế", href: "/dich-vu/ke-khai-thue" },
+        { name: "Hỗ trợ thanh tra/quyết toán thuế", href: "/dich-vu/quyet-toan-thue" },
+        { name: "Hoàn thuế (TNCN/GTGT)" },
+      ],
+    },
+    {
+      label: "Dịch vụ pháp lý doanh nghiệp",
+      items: [
+        { name: "Thành lập doanh nghiệp", href: "/dich-vu/thanh-lap-doanh-nghiep" },
+        { name: "Thay đổi thông tin đăng ký doanh nghiệp" },
+        { name: "Tạm ngừng kinh doanh" },
+        { name: "Thành lập chi nhánh/Văn phòng đại diện" },
+        { name: "Giải thể doanh nghiệp", href: "/dich-vu/giai-the-doanh-nghiep" },
+      ],
+    },
+    {
+      label: "Giấy phép lao động và thẻ tạm trú",
+      items: [
+        { name: "Xin cấp/xin miễn/gia hạn giấy phép lao động cho người nước ngoài", href: "/dich-vu/giay-phep-lao-dong" },
+        { name: "Xin cấp/xin miễn/gia hạn thẻ tạm trú cho người nước ngoài", href: "/dich-vu/giay-phep-lao-dong" },
+      ],
+    },
   ];
 
   const navLinks = [
@@ -66,13 +87,12 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between h-full">
         <Link href="/">
-          <div className={`cursor-pointer text-2xl font-bold font-display tracking-tight flex items-center gap-2 transition-colors ${
-            useDarkNav ? "text-primary" : "text-white"
-          }`}>
-            <span className={`px-2.5 h-10 flex items-center justify-center rounded-lg transition-colors text-base font-bold ${
-              useDarkNav ? "bg-primary text-white" : "bg-white text-primary"
-            }`}>NTH</span>
-            NTH CONSULTING
+          <div className="cursor-pointer rounded-lg overflow-hidden inline-flex bg-white">
+            <img
+              src={logoHorizontal}
+              alt="NTH Consulting"
+              className="h-9 md:h-10 w-auto block"
+            />
           </div>
         </Link>
 
@@ -96,14 +116,34 @@ export function Navbar() {
                 </div>
                 {desktopServicesOpen && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
-                    <div className="bg-white rounded-xl shadow-xl border border-slate-100 py-2 min-w-[260px] animate-in fade-in slide-in-from-top-2 duration-200">
-                      {serviceSubLinks.map((sub) => (
-                        <Link key={sub.name} href={sub.href}>
-                          <div className="px-4 py-2.5 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors">
-                            {sub.name}
+                    <div className="bg-white rounded-xl shadow-xl border border-slate-100 p-6 w-[860px] animate-in fade-in slide-in-from-top-2 duration-200">
+                      <div className="grid grid-cols-3 gap-6">
+                        {serviceGroups.map((group) => (
+                          <div key={group.label}>
+                            <div className="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-3 pb-2 border-b border-slate-100">
+                              {group.label}
+                            </div>
+                            <div className="flex flex-col gap-0.5">
+                              {group.items.map((item) =>
+                                item.href ? (
+                                  <Link key={item.name} href={item.href}>
+                                    <div className="px-3 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors rounded-md leading-snug">
+                                      {item.name}
+                                    </div>
+                                  </Link>
+                                ) : (
+                                  <div
+                                    key={item.name}
+                                    className="px-3 py-2 text-sm text-slate-400 cursor-default rounded-md leading-snug"
+                                  >
+                                    {item.name}
+                                  </div>
+                                )
+                              )}
+                            </div>
                           </div>
-                        </Link>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -159,16 +199,34 @@ export function Navbar() {
                   {servicesOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </div>
                 {servicesOpen && (
-                  <div className="ml-4 border-l-2 border-blue-100 pl-2 flex flex-col gap-1 mt-1 mb-2">
-                    {serviceSubLinks.map((sub) => (
-                      <Link key={sub.name} href={sub.href}>
-                        <div
-                          className="cursor-pointer text-slate-600 text-sm py-2 px-3 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
-                          onClick={() => { setMobileMenuOpen(false); setServicesOpen(false); }}
-                        >
-                          {sub.name}
+                  <div className="ml-4 border-l-2 border-blue-100 pl-2 flex flex-col gap-3 mt-1 mb-2">
+                    {serviceGroups.map((group) => (
+                      <div key={group.label}>
+                        <div className="text-xs font-semibold uppercase tracking-wider text-blue-600 px-3 py-1.5">
+                          {group.label}
                         </div>
-                      </Link>
+                        <div className="flex flex-col gap-0.5">
+                          {group.items.map((item) =>
+                            item.href ? (
+                              <Link key={item.name} href={item.href}>
+                                <div
+                                  className="cursor-pointer text-slate-600 text-sm py-2 px-3 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors leading-snug"
+                                  onClick={() => { setMobileMenuOpen(false); setServicesOpen(false); }}
+                                >
+                                  {item.name}
+                                </div>
+                              </Link>
+                            ) : (
+                              <div
+                                key={item.name}
+                                className="text-slate-400 text-sm py-2 px-3 cursor-default leading-snug"
+                              >
+                                {item.name}
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}

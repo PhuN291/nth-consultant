@@ -11,6 +11,7 @@ export interface ServiceData {
   price: string;
   unit: string;
   sku: string;
+  image?: string;
   highlights: string[];
   problems: string[];
   problemNote: string;
@@ -38,6 +39,7 @@ export const services: ServiceData[] = [
     price: "Liên hệ",
     unit: "",
     sku: "GT-DN-01",
+    image: "https://images.pexels.com/photos/7643745/pexels-photo-7643745.jpeg?auto=compress&cs=tinysrgb&w=1200",
     highlights: [
       "Nhanh chóng – chính xác, không mất thời gian tìm hiểu thủ tục",
       "Tuân thủ pháp luật, đúng trình tự với cơ quan thuế và đăng ký kinh doanh",
@@ -124,6 +126,7 @@ export const services: ServiceData[] = [
     price: "Liên hệ",
     unit: "",
     sku: "KK-TH-01",
+    image: "https://images.pexels.com/photos/7643795/pexels-photo-7643795.jpeg?auto=compress&cs=tinysrgb&w=1200",
     highlights: [
       "Đúng hạn – đúng luật, không còn lo quên kỳ báo cáo",
       "Hạn chế tối đa rủi ro thuế – sai sót nhỏ không thành chi phí lớn",
@@ -206,6 +209,7 @@ export const services: ServiceData[] = [
     price: "Liên hệ",
     unit: "",
     sku: "KT-TG-01",
+    image: "https://images.pexels.com/photos/7643734/pexels-photo-7643734.jpeg?auto=compress&cs=tinysrgb&w=1200",
     highlights: [
       "Giảm chi phí nhân sự nội bộ so với duy trì phòng kế toán",
       "Báo cáo thuế – sổ sách kế toán luôn chính xác, đúng hạn",
@@ -288,6 +292,7 @@ export const services: ServiceData[] = [
     price: "Liên hệ",
     unit: "",
     sku: "BC-TC-01",
+    image: "https://images.pexels.com/photos/7845358/pexels-photo-7845358.jpeg?auto=compress&cs=tinysrgb&w=1200",
     highlights: [
       "Hoàn thiện hồ sơ cuối năm đúng chuẩn, đúng hạn",
       "Yên tâm khi thanh kiểm tra thuế",
@@ -377,6 +382,7 @@ export const services: ServiceData[] = [
     price: "Liên hệ",
     unit: "",
     sku: "QT-TH-01",
+    image: "https://images.pexels.com/photos/7643893/pexels-photo-7643893.jpeg?auto=compress&cs=tinysrgb&w=1200",
     highlights: [
       "Giảm căng thẳng khi có đoàn kiểm tra đến",
       "Tiết kiệm thời gian – chúng tôi xử lý hồ sơ và giải trình thay bạn",
@@ -459,6 +465,7 @@ export const services: ServiceData[] = [
     price: "Liên hệ",
     unit: "",
     sku: "RS-SS-01",
+    image: "https://images.pexels.com/photos/7845349/pexels-photo-7845349.jpeg?auto=compress&cs=tinysrgb&w=1200",
     highlights: [
       "Sổ sách chuẩn – số liệu chính xác, an tâm về báo cáo tài chính",
       "Phát hiện sai sót kịp thời – tránh rủi ro bị phạt hoặc truy thu",
@@ -542,6 +549,7 @@ export const services: ServiceData[] = [
     price: "Liên hệ",
     unit: "",
     sku: "GP-LD-01",
+    image: "https://images.pexels.com/photos/7845104/pexels-photo-7845104.jpeg?auto=compress&cs=tinysrgb&w=1200",
     highlights: [
       "Nhanh chóng – chính xác, hồ sơ đầy đủ giảm tối đa rủi ro bị trả lại",
       "Tiết kiệm thời gian – chúng tôi xử lý toàn bộ thủ tục thay bạn",
@@ -623,6 +631,7 @@ export const services: ServiceData[] = [
     price: "Liên hệ",
     unit: "",
     sku: "TL-DN-01",
+    image: "https://images.pexels.com/photos/7643860/pexels-photo-7643860.jpeg?auto=compress&cs=tinysrgb&w=1200",
     highlights: [
       "Nhanh chóng – tiết kiệm thời gian, không lo thủ tục rườm rà",
       "Đầy đủ pháp lý – đăng ký hợp pháp, tuân thủ luật",

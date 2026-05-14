@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Facebook, Linkedin, Twitter } from "lucide-react";
 import { AnchorLink } from "@/components/AnchorLink";
+import logoHorizontal from "@/assets/images/logo-horizontal.png";
 
 const SOCIAL_LINKS = {
   // Đổi sang URL thật khi user có trang social
@@ -25,10 +26,9 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              className="text-2xl font-bold font-display text-white mb-6 inline-flex items-center gap-2"
+              className="inline-flex rounded-lg overflow-hidden bg-white mb-6"
             >
-              <span className="bg-blue-600 text-white px-2 h-8 flex items-center justify-center rounded text-xs font-bold">NTH</span>
-              NTH CONSULTING
+              <img src={logoHorizontal} alt="NTH Consulting" className="h-11 w-auto block" />
             </Link>
             <p className="text-slate-400 leading-relaxed mb-6">
               Đối tác tin cậy của doanh nghiệp trong lĩnh vực kế toán, thuế và tư vấn tài chính. Chúng tôi cam kết mang lại giá trị bền vững.

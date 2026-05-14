@@ -81,7 +81,7 @@ export default function ServiceDetail() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: image */}
             <div className="rounded-lg overflow-hidden border border-slate-200 order-1 lg:order-1">
-              <img src={heroImg} alt={service.title} className="w-full aspect-[4/3] object-cover" />
+              <img src={service.image || heroImg} alt={service.title} className="w-full aspect-[4/3] object-cover" />
             </div>
 
             {/* Right: title + highlights + price + CTAs */}
