@@ -68,6 +68,13 @@ async function buildAll() {
     entryPoints: ["server/migrate.ts"],
     outfile: "dist/migrate.cjs",
   });
+
+  console.log("building seed script...");
+  await esbuild({
+    ...sharedEsbuildConfig,
+    entryPoints: ["server/seed.ts"],
+    outfile: "dist/seed.cjs",
+  });
 }
 
 buildAll().catch((err) => {
