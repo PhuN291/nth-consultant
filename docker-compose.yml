@@ -22,7 +22,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 5050
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable
       SESSION_SECRET: ${SESSION_SECRET}
       CLOUDINARY_URL: ${CLOUDINARY_URL}
     depends_on:
