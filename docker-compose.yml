@@ -18,7 +18,7 @@ services:
     image: longhuynhpyn01/nth-consultant:latest
     restart: unless-stopped
     ports:
-      - "127.0.0.1:5050:5050"
+      - "5050:5050"
     environment:
       NODE_ENV: production
       PORT: 5050
