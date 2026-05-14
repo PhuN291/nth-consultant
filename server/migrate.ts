@@ -5,7 +5,7 @@ import path from "path";
 async function main() {
   console.log("Running migrations...");
   await migrate(db, {
-    migrationsFolder: path.resolve(import.meta.dirname, "../migrations"),
+    migrationsFolder: path.resolve(__dirname, "../migrations"),
   });
   console.log("Migrations complete.");
   await pool.end();
