@@ -58,8 +58,5 @@ jobs:
             docker compose pull
             docker compose up -d
 
-            # Chạy migration
-            docker compose exec -T app node dist/migrate.cjs
-
             # Xóa image cũ
             docker image prune -f
