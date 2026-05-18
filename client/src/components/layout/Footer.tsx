@@ -74,6 +74,14 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/dich-vu"
+                  className="text-blue-400 hover:text-blue-300 font-semibold transition-colors"
+                >
+                  Xem tất cả dịch vụ →
+                </Link>
+              </li>
             </ul>
           </div>
 

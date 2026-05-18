@@ -8,6 +8,7 @@ import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import Home from "@/pages/Home";
 import ServiceDetail from "@/pages/ServiceDetail";
+import ServicesPage from "@/pages/ServicesPage";
 import AdminLogin from "@/pages/admin/Login";
 import AdminBlogList from "@/pages/admin/BlogList";
 import BlogForm from "@/pages/admin/BlogForm";
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/tin-tuc" component={Blog} />
       <Route path="/tin-tuc/:slug" component={BlogPost} />
+      <Route path="/dich-vu" component={ServicesPage} />
       <Route path="/dich-vu/:slug" component={ServiceDetail} />
       <Route path="/chinh-sach-bao-mat" component={PrivacyPolicy} />
       <Route path="/dieu-khoan-su-dung" component={TermsOfService} />

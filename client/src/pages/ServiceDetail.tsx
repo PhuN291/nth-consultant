@@ -23,7 +23,6 @@ import { Link, useParams } from "wouter";
 import { useEffect } from "react";
 import { getServiceBySlug } from "@/data/services";
 import { ContactDialog } from "@/components/ContactDialog";
-import { AnchorLink } from "@/components/AnchorLink";
 import { FloatingContact } from "@/components/FloatingContact";
 import { ProcessTimeline } from "@/components/service/ProcessTimeline";
 import { RelatedServices } from "@/components/service/RelatedServices";
@@ -66,9 +65,9 @@ export default function ServiceDetail() {
               <Home className="w-4 h-4" />
             </Link>
             <span className="mx-2 text-slate-300 flex-shrink-0">/</span>
-            <AnchorLink href="/#dich-vu" className="hover:text-primary transition-colors flex-shrink-0">
+            <Link href="/dich-vu" className="hover:text-primary transition-colors flex-shrink-0">
               Dịch vụ
-            </AnchorLink>
+            </Link>
             <span className="mx-2 text-slate-300 flex-shrink-0">/</span>
             <span className="text-slate-900 font-medium truncate">{service.title}</span>
           </div>

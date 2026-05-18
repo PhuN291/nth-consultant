@@ -74,7 +74,7 @@ export function Navbar() {
   const navLinks = [
     { name: "Trang chủ", href: "/" },
     { name: "Về chúng tôi", href: "#ve-chung-toi" },
-    { name: "Dịch vụ", href: "#dich-vu", hasSubmenu: true },
+    { name: "Dịch vụ", href: "/dich-vu", hasSubmenu: true },
     { name: "Bảng giá", href: "#bang-gia" },
     { name: "Tin tức", href: "/tin-tuc" },
   ];

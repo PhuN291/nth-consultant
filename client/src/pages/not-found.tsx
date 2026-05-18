@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { AnchorLink } from "@/components/AnchorLink";
 import { ContactDialog } from "@/components/ContactDialog";
 import { Home, Search, ArrowRight, Compass } from "lucide-react";
 
@@ -51,12 +50,12 @@ export default function NotFound() {
                   Về trang chủ
                 </Button>
               </Link>
-              <AnchorLink href="/#dich-vu">
+              <Link href="/dich-vu">
                 <Button size="lg" variant="outline" className="font-semibold w-full sm:w-auto">
                   <Search className="w-4 h-4 mr-2" />
                   Xem tất cả dịch vụ
                 </Button>
-              </AnchorLink>
+              </Link>
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8 text-left">

@@ -170,15 +170,23 @@ function ArticleCta() {
         <p className="text-blue-100 mb-6">
           Đội ngũ NTH Consulting sẵn sàng đồng hành cùng bạn. Nhận tư vấn miễn phí ngay hôm nay.
         </p>
-        <ContactDialog
-          source="blog-post-cta"
-          trigger={
-            <Button className="bg-white text-blue-700 hover:bg-blue-50 font-bold h-12 px-8">
-              Liên hệ tư vấn miễn phí
-              <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
-            </Button>
-          }
-        />
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+          <ContactDialog
+            source="blog-post-cta"
+            trigger={
+              <Button className="bg-white text-blue-700 hover:bg-blue-50 font-bold h-12 px-8">
+                Liên hệ tư vấn miễn phí
+                <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
+              </Button>
+            }
+          />
+          <Link
+            href="/dich-vu"
+            className="text-sm text-blue-100 hover:text-white font-medium underline-offset-2 hover:underline transition-colors"
+          >
+            Hoặc xem tất cả dịch vụ →
+          </Link>
+        </div>
       </div>
     </section>
   );
