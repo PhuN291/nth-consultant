@@ -27,8 +27,13 @@ import { FloatingContact } from "@/components/FloatingContact";
 import { ProcessTimeline } from "@/components/service/ProcessTimeline";
 import { RelatedServices } from "@/components/service/RelatedServices";
 import { ComparisonTable } from "@/components/sections/ComparisonTable";
+import ServiceDetailKeToanTronGoi from "@/pages/ServiceDetailKeToanTronGoi";
 
 import heroImg from "@/assets/images/service-detail-1.jpg";
+
+// Trang "Kế toán trọn gói" dùng layout thiết kế riêng (theo wireframe duyệt riêng),
+// khác với template chung áp dụng cho các dịch vụ còn lại.
+const CUSTOM_LAYOUT_SLUGS = new Set(["ke-toan-tron-goi"]);
 
 export default function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -37,6 +42,10 @@ export default function ServiceDetail() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  if (slug && CUSTOM_LAYOUT_SLUGS.has(slug)) {
+    return <ServiceDetailKeToanTronGoi />;
+  }
 
   if (!service) {
     return (

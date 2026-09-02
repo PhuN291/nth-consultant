@@ -203,7 +203,7 @@ export const services: ServiceData[] = [
   // 3. Kế toán trọn gói
   {
     slug: "ke-toan-tron-goi",
-    title: "Dịch Vụ Kế Toán Chuyên Nghiệp",
+    title: "Dịch Vụ Kế Toán Trọn Gói",
     subtitle: "Đồng hành cùng doanh nghiệp phát triển bền vững",
     description: "Bạn đang tìm kiếm dịch vụ kế toán uy tín, chi phí hợp lý và đáp ứng đầy đủ quy định pháp luật?\n\nChúng tôi cung cấp dịch vụ kế toán trọn gói giúp doanh nghiệp tiết kiệm thời gian, tối ưu chi phí và hạn chế tối đa rủi ro về thuế.",
     price: "Liên hệ",
