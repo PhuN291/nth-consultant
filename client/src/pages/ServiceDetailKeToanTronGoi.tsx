@@ -256,9 +256,9 @@ const faqs = [
 // Section heading dùng chung — giữ đúng copy & thứ tự "nhãn nhỏ + tiêu đề + mô tả" như wireframe
 function SectionHeading({ label, heading, sub }: { label: string; heading: string; sub?: string }) {
   return (
-    <div className="text-center max-w-2xl mx-auto mb-10">
+    <div className="max-w-2xl mx-auto mb-10 text-center">
       <span className="text-slate-500 font-bold tracking-[0.12em] text-xs uppercase mb-2 block">{label}</span>
-      <h2 className="text-2xl md:text-3xl font-bold font-display text-slate-900 mb-3">{heading}</h2>
+      <h2 className="mb-3 text-2xl font-bold md:text-3xl font-display text-slate-900">{heading}</h2>
       {sub && <p className="text-slate-600">{sub}</p>}
     </div>
   );
@@ -304,11 +304,11 @@ function CtaInlineForm({ serviceTitle, source }: { serviceTitle: string; source:
 
   if (success) {
     return (
-      <div className="max-w-130 mx-auto mt-6 bg-white rounded-2xl p-6 text-center">
-        <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-green-100 flex items-center justify-center">
+      <div className="p-6 mx-auto mt-6 text-center bg-white max-w-130 rounded-2xl">
+        <div className="flex items-center justify-center w-12 h-12 mx-auto mb-3 bg-green-100 rounded-full">
           <CheckCircle2 className="w-6 h-6 text-green-600" />
         </div>
-        <h3 className="font-bold text-slate-900 mb-1">Đã gửi thành công!</h3>
+        <h3 className="mb-1 font-bold text-slate-900">Đã gửi thành công!</h3>
         <p className="text-sm text-slate-600">Chuyên viên NTH sẽ liên hệ lại trong vòng 15 phút.</p>
       </div>
     );
@@ -347,7 +347,7 @@ function CtaInlineForm({ serviceTitle, source }: { serviceTitle: string; source:
         className="flex-1 min-w-40 border border-slate-200 rounded-lg px-3.5 py-3 text-[13.5px] text-slate-900 placeholder:text-slate-400"
       />
       {error && (
-        <div className="w-full bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg px-3 py-2 text-center">
+        <div className="w-full px-3 py-2 text-xs text-center text-red-700 border border-red-200 rounded-lg bg-red-50">
           {error}
         </div>
       )}
@@ -372,37 +372,37 @@ export default function ServiceDetailKeToanTronGoi() {
   if (!service) return null;
 
   return (
-    <div className="min-h-screen font-sans bg-white selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
-      <div className="bg-blue-900 sticky top-0 z-50">
+    <div className="min-h-screen overflow-x-hidden font-sans bg-white selection:bg-blue-100 selection:text-blue-900">
+      <div className="sticky top-0 z-50 bg-blue-900">
         <Navbar />
       </div>
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-200 pt-20">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-            <Link href="/" className="hover:text-primary transition-colors flex-shrink-0">
+      <div className="pt-20 bg-white border-b border-slate-200">
+        <div className="container px-4 py-3 mx-auto">
+          <div className="flex items-center px-4 -mx-4 overflow-x-auto text-sm text-slate-500 whitespace-nowrap scrollbar-hide md:mx-0 md:px-0">
+            <Link href="/" className="flex-shrink-0 transition-colors hover:text-primary">
               <Home className="w-4 h-4" />
             </Link>
-            <span className="mx-2 text-slate-300 flex-shrink-0">/</span>
-            <Link href="/dich-vu" className="hover:text-primary transition-colors flex-shrink-0">
+            <span className="flex-shrink-0 mx-2 text-slate-300">/</span>
+            <Link href="/dich-vu" className="flex-shrink-0 transition-colors hover:text-primary">
               Dịch vụ
             </Link>
-            <span className="mx-2 text-slate-300 flex-shrink-0">/</span>
-            <span className="text-slate-900 font-medium truncate">{service.title}</span>
+            <span className="flex-shrink-0 mx-2 text-slate-300">/</span>
+            <span className="font-medium truncate text-slate-900">{service.title}</span>
           </div>
         </div>
       </div>
 
       {/* HERO — cột trái 1.1fr rộng hơn cột phải 0.9fr, giống wireframe ==== */}
-      <section className="bg-gradient-to-br from-blue-50 via-blue-50/60 to-white border-b border-slate-100 pt-10 pb-14 md:pt-14 md:pb-16">
-        <div className="container mx-auto px-4">
+      <section className="pt-10 border-b bg-gradient-to-br from-blue-50 via-blue-50/60 to-white border-slate-100 pb-14 md:pt-14 md:pb-16">
+        <div className="container px-4 mx-auto">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-center">
             <div>
               <h1 className="text-3xl md:text-4xl lg:text-[42px] font-bold font-display text-slate-900 mb-4 leading-tight max-w-xl">
                 {service.title}
               </h1>
-              <p className="text-base md:text-lg text-slate-600 mb-6 leading-relaxed max-w-lg">
+              <p className="max-w-lg mb-6 text-base leading-relaxed md:text-lg text-slate-600">
                 Giao toàn bộ sổ sách, thuế và báo cáo tài chính cho đội ngũ kế toán chuyên trách của NTH, để bạn tập trung thời gian và nguồn lực vào việc phát triển kinh doanh.
               </p>
 
@@ -415,23 +415,23 @@ export default function ServiceDetailKeToanTronGoi() {
                 ))}
               </ul>
 
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row">
                 <ContactDialog
                   source={`service-detail/${service.slug}`}
                   service={service.title}
                   trigger={
-                    <Button size="lg" className="h-12 font-semibold px-6">
+                    <Button size="lg" className="h-12 px-6 font-semibold">
                       Nhận tư vấn trong 30 phút
                     </Button>
                   }
                 />
-                <Button asChild size="lg" variant="outline" className="h-12 font-semibold px-6 border-slate-300">
+                <Button asChild size="lg" variant="outline" className="h-12 px-6 font-semibold border-slate-300">
                   <a href="#bang-gia">Xem các gói dịch vụ</a>
                 </Button>
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden shadow-sm">
+            <div className="overflow-hidden shadow-sm rounded-2xl">
               <img
                 src={service.image}
                 alt={service.title}
@@ -443,21 +443,21 @@ export default function ServiceDetailKeToanTronGoi() {
       </section>
 
       {/* VẤN ĐỀ THƯỜNG GẶP — section trắng full-width, đúng wireframe ====== */}
-      <section className="py-14 md:py-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="bg-white py-14 md:py-16">
+        <div className="container px-4 mx-auto">
           <SectionHeading
             label="Vấn đề thường gặp"
             heading="Doanh nghiệp bạn có đang gặp những vấn đề này"
             sub="Đây là lý do phổ biến nhất khiến các chủ doanh nghiệp tìm đến dịch vụ kế toán trọn gói thay vì tự vận hành nội bộ."
           />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {painPoints.map((p, i) => (
-              <div key={i} className="border border-slate-200 rounded-xl p-6 bg-white shadow-sm">
+              <div key={i} className="p-6 bg-white border shadow-sm border-slate-200 rounded-xl">
                 <div className="w-11 h-11 rounded-[10px] bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg mb-3.5">
                   {i + 1}
                 </div>
-                <h3 className="font-semibold text-slate-900 text-base mb-2">{p.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{p.desc}</p>
+                <h3 className="mb-2 text-base font-semibold text-slate-900">{p.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-600">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -465,17 +465,17 @@ export default function ServiceDetailKeToanTronGoi() {
       </section>
 
       {/* PHẠM VI CÔNG VIỆC — card xám bo góc nổi trên nền trắng (scope-wrap) */}
-      <section className="py-3 md:py-4 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-3 bg-white md:py-4">
+        <div className="container px-4 mx-auto">
           <div className="bg-slate-50 rounded-[20px] px-6 py-11 md:px-10 md:py-14">
             <SectionHeading
               label="Phạm vi công việc"
               heading="Dịch vụ kế toán trọn gói của NTH bao gồm những gì"
               sub="Một gói dịch vụ, xử lý toàn bộ nghiệp vụ kế toán, thuế và báo cáo. Áp dụng linh hoạt cho công ty thương mại, dịch vụ, sản xuất và hộ kinh doanh cá thể, phạm vi cụ thể sẽ được điều chỉnh theo đặc thù ngành nghề của từng khách hàng."
             />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {scopeGroups.map((g) => (
-                <div key={g.num} className="bg-white border border-slate-200 rounded-lg p-5">
+                <div key={g.num} className="p-5 bg-white border rounded-lg border-slate-200">
                   <div className="w-[30px] h-[30px] rounded-lg bg-blue-50 text-primary flex items-center justify-center font-bold text-[13px] mb-3">
                     {g.num}
                   </div>
@@ -496,19 +496,19 @@ export default function ServiceDetailKeToanTronGoi() {
       </section>
 
       {/* ĐỐI TƯỢNG PHÙ HỢP — card xám bo góc, đúng wireframe ================ */}
-      <section className="py-3 md:py-4 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-3 bg-white md:py-4">
+        <div className="container px-4 mx-auto">
           <div className="bg-slate-50 rounded-[24px] px-6 py-11 md:px-10 md:py-14">
             <SectionHeading
               label="Đối tượng phù hợp"
               heading="Dịch vụ này dành cho ai"
               sub="NTH thiết kế dịch vụ kế toán trọn gói để giải quyết đúng bài toán của từng nhóm doanh nghiệp."
             />
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className="grid gap-5 md:grid-cols-3">
               {audience.map((a, i) => (
-                <div key={i} className="bg-blue-50 rounded-lg p-6">
-                  <h4 className="font-semibold text-blue-900 text-base mb-2">{a.title}</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">{a.desc}</p>
+                <div key={i} className="p-6 rounded-lg bg-blue-50">
+                  <h4 className="mb-2 text-base font-semibold text-blue-900">{a.title}</h4>
+                  <p className="text-sm leading-relaxed text-slate-600">{a.desc}</p>
                 </div>
               ))}
             </div>
@@ -526,72 +526,16 @@ export default function ServiceDetailKeToanTronGoi() {
         dashedConnector
       />
 
-      {/* BẢNG GIÁ — section trắng full-width, đúng wireframe ================ */}
-      <section id="bang-gia" className="py-14 md:py-16 bg-white scroll-mt-20">
-        <div className="container mx-auto px-4">
-          <SectionHeading
-            label="Bảng giá tham khảo"
-            heading="Chọn gói dịch vụ phù hợp với quy mô doanh nghiệp"
-            sub="Mức phí thực tế phụ thuộc vào số lượng chứng từ phát sinh mỗi tháng. Bảng dưới đây là mức tham khảo, NTH sẽ báo giá chính xác sau khi khảo sát nhanh miễn phí."
-          />
-          <div className="grid md:grid-cols-3 gap-6 items-stretch max-w-5xl mx-auto">
-            {pricingTiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={`relative flex flex-col rounded-2xl p-7 bg-white border ${
-                  tier.featured
-                    ? "border-2 border-primary shadow-xl shadow-primary/10 md:-translate-y-2"
-                    : "border-slate-200"
-                }`}
-              >
-                {tier.badge && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3.5 py-1 rounded-full">
-                    {tier.badge}
-                  </span>
-                )}
-                <h4 className="font-bold text-slate-900 text-lg mb-1">{tier.name}</h4>
-                <p className="text-xs text-slate-500 mb-4 min-h-[32px]">{tier.desc}</p>
-                <div className="mb-1">
-                  <span className="text-2xl font-bold text-primary">{tier.price}</span>{" "}
-                  <span className="text-sm text-slate-500 font-medium">{tier.unit}</span>
-                </div>
-                <p className="text-xs text-slate-500 mb-5">{tier.note}</p>
-                <ul className="space-y-2.5 mb-6 flex-1">
-                  {tier.features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                      <span className="text-emerald-600 font-bold flex-shrink-0">✓</span>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <ContactDialog
-                  source={`service-detail-pricing/${tier.name}`}
-                  service={`${service.title} — ${tier.name}`}
-                  trigger={
-                    <Button
-                      className="w-full font-semibold"
-                      variant={tier.featured ? "default" : "outline"}
-                    >
-                      {tier.cta}
-                    </Button>
-                  }
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CAM KẾT — section trắng full-width, đúng wireframe ================ */}
       {service.commitments && service.commitments.length > 0 && (
-        <section className="py-14 md:py-16 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="bg-white py-14 md:py-16">
+          <div className="container px-4 mx-auto">
             <SectionHeading label="Vì sao chọn NTH" heading="Cam kết của chúng tôi" />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {service.commitments.map((c, i) => {
                 const Icon = commitmentIcons[i % commitmentIcons.length];
                 return (
-                  <div key={i} className="border border-slate-200 rounded-lg p-6 bg-white">
+                  <div key={i} className="p-6 bg-white border rounded-lg border-slate-200">
                     <div className="w-10 h-10 rounded-[10px] bg-blue-50 text-primary flex items-center justify-center mb-3.5">
                       <Icon className="w-5 h-5" />
                     </div>
@@ -606,20 +550,20 @@ export default function ServiceDetailKeToanTronGoi() {
       )}
 
       {/* LỢI ÍCH — card xám bo góc, đúng wireframe =========================== */}
-      <section className="py-3 md:py-4 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-3 bg-white md:py-4">
+        <div className="container px-4 mx-auto">
           <div className="bg-slate-50 rounded-[24px] px-6 py-11 md:px-10 md:py-14">
             <SectionHeading label="Giá trị mang lại" heading="Lợi ích khi sử dụng dịch vụ" />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-[18px]">
               {service.benefits.map((b, i) => {
                 const Icon = benefitIcons[i % benefitIcons.length];
                 return (
-                  <div key={i} className="bg-white border border-slate-200 rounded-lg p-5">
+                  <div key={i} className="p-5 bg-white border rounded-lg border-slate-200">
                     <div className="w-[38px] h-[38px] rounded-full bg-primary text-white flex items-center justify-center mb-3.5">
                       <Icon className="w-4 h-4" />
                     </div>
                     <h4 className="font-semibold text-slate-900 text-sm mb-1.5 leading-snug">{b.title}</h4>
-                    <p className="text-xs text-slate-600 leading-relaxed">{b.description}</p>
+                    <p className="text-xs leading-relaxed text-slate-600">{b.description}</p>
                   </div>
                 );
               })}
@@ -629,10 +573,10 @@ export default function ServiceDetailKeToanTronGoi() {
       </section>
 
       {/* THỐNG KÊ — dải tối bo góc nổi trong section trắng, đúng wireframe === */}
-      <section className="py-8 md:py-10 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-8 bg-white md:py-10">
+        <div className="container px-4 mx-auto">
           <div className="bg-slate-900 rounded-[20px] px-6 py-10 md:px-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
               {[
                 { value: "10+", label: "Năm kinh nghiệm" },
                 { value: "500+", label: "Khách hàng" },
@@ -650,13 +594,13 @@ export default function ServiceDetailKeToanTronGoi() {
       </section>
 
       {/* KHÁCH HÀNG NÓI GÌ — card xám bo góc, đúng wireframe ================= */}
-      <section className="py-3 md:py-4 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-3 bg-white md:py-4">
+        <div className="container px-4 mx-auto">
           <div className="bg-slate-50 rounded-[24px] px-6 py-11 md:px-10 md:py-14">
             <SectionHeading label="Khách hàng nói gì" heading="Doanh nghiệp đã tin tưởng NTH" />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {testimonials.map((t, i) => (
-                <div key={i} className="border border-slate-200 rounded-lg p-6 bg-white flex flex-col">
+                <div key={i} className="flex flex-col p-6 bg-white border rounded-lg border-slate-200">
                   <Quote className="w-6 h-6 text-blue-100 mb-3.5" />
                   <p className="text-[13.5px] text-slate-800 italic mb-4 flex-1 leading-relaxed">"{t.quote}"</p>
                   <div>
@@ -671,8 +615,8 @@ export default function ServiceDetailKeToanTronGoi() {
       </section>
 
       {/* FAQ — section trắng full-width, đúng wireframe ===================== */}
-      <section className="py-14 md:py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
+      <section className="bg-white py-14 md:py-16">
+        <div className="container max-w-3xl px-4 mx-auto">
           <SectionHeading label="Câu hỏi thường gặp" heading="Giải đáp thắc mắc trước khi bắt đầu" />
           <Accordion type="single" collapsible className="space-y-2">
             {faqs.map((f, i) => (
@@ -681,13 +625,13 @@ export default function ServiceDetailKeToanTronGoi() {
                 value={`faq-${i}`}
                 className="bg-slate-50 rounded-lg border border-slate-100 px-4 !border-b"
               >
-                <AccordionTrigger className="hover:no-underline py-4 text-sm md:text-base font-semibold text-slate-900 text-left">
+                <AccordionTrigger className="py-4 text-sm font-semibold text-left hover:no-underline md:text-base text-slate-900">
                   <span className="flex items-center gap-3 text-left">
-                    <HelpCircle className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                    <HelpCircle className="flex-shrink-0 w-4 h-4 text-slate-400" />
                     {f.q}
                   </span>
                 </AccordionTrigger>
-                <AccordionContent className="text-sm text-slate-600 pb-4 leading-relaxed pl-7">
+                <AccordionContent className="pb-4 text-sm leading-relaxed text-slate-600 pl-7">
                   {f.a}
                 </AccordionContent>
               </AccordionItem>
@@ -697,13 +641,13 @@ export default function ServiceDetailKeToanTronGoi() {
       </section>
 
       {/* CTA CUỐI — card gradient bo góc nổi trong section trắng, đúng wireframe */}
-      <section className="py-3 md:py-4 pb-14 md:pb-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-3 bg-white md:py-4 pb-14 md:pb-16">
+        <div className="container px-4 mx-auto">
           <div className="bg-gradient-to-br from-primary to-blue-800 rounded-[24px] px-6 py-12 md:px-10 md:py-14 text-white text-center max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold font-display mb-3 text-white">
+            <h2 className="mb-3 text-2xl font-bold text-white md:text-3xl font-display">
               Sẵn sàng bàn giao kế toán cho NTH
             </h2>
-            <p className="text-blue-100 text-base md:text-lg mb-2">
+            <p className="mb-2 text-base text-blue-100 md:text-lg">
               Để lại thông tin, NTH sẽ liên hệ tư vấn và gửi báo giá phù hợp với quy mô doanh nghiệp của bạn trong vòng 30 phút làm việc.
             </p>
             <CtaInlineForm serviceTitle={service.title} source={`service-detail-bottom-cta/${service.slug}`} />
@@ -716,9 +660,9 @@ export default function ServiceDetailKeToanTronGoi() {
       <FloatingContact />
 
       {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-3 md:hidden z-50">
+      <div className="fixed bottom-0 left-0 right-0 z-50 p-3 bg-white border-t border-slate-200 md:hidden">
         <div className="flex gap-2">
-          <Button asChild variant="outline" className="flex-1 border-slate-300 font-semibold h-11">
+          <Button asChild variant="outline" className="flex-1 font-semibold border-slate-300 h-11">
             <a href="tel:0344130989">
               <Phone className="w-4 h-4 mr-1" /> Gọi
             </a>
